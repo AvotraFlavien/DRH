@@ -13,3 +13,5 @@ class Employe extends Model
         "date_naissance", "adresse", "photo", "status"
     ];
 }
+
+?>
