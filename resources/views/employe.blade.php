@@ -46,7 +46,7 @@
                   </div>
             </td>
           <td></td>
-          <td></td>
+          <td id="responseDiv" ></td>
           <td></td> 
           <td></td>  
           <td></td>  
@@ -69,16 +69,26 @@
      </div>
     </div>
 
+    <div id="responseDiv"></div>
 
-     <script>
-       axios.get('https://api.example.com/data')
-  .then(response => {
-    // Handle the response data
-    console.log(response.data);
-  })
-  .catch(error => {
-    // Handle any error that occurs
-    console.error(error);
-  });
 
-     </script>
+    <script>
+        axios.get('http://127.0.0.1:8000/api/user/list')
+            .then(response => {
+                const responseData = response.data.data;
+                const responseDiv = document.getElementById('responseDiv');
+
+                for (let i = 0; i < responseData.length; i++) {
+                    const user = responseData[i];
+                    const nameElement = document.createElement('p');
+                    nameElement.textContent = user.name;
+                    console.log(user.name);
+                    responseDiv.appendChild(nameElement);
+                }
+
+            })
+            .catch(error => {
+                console.error(error);
+                // Gérez les erreurs ici
+            });
+    </script>
