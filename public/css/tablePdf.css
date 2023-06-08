@@ -1,0 +1,51 @@
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 0.5125rem;
+  background: #fff;
+  line-height: 1.6;
+}
+
+table {
+  width: 100%;
+}
+
+.right {
+  text-align: right;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding-left: 2px;
+  padding-top: 5px;
+}
+
+table .date {
+  width: 6%;
+}
+table .libelle {
+  width: 40%;
+  text-transform: uppercase;
+}
+table .refDevis {
+  width: 13%;
+}
+table .refBc {
+  width: 13%;
+}
+table .nature {
+  width: 30%;
+}
+table .debit {
+  width: 7%;
+}
+table .credit {
+  width: 7%;
+}
+table .solde {
+  width: 7%;
+}
+table .piece {
+  width: 7%;
+}

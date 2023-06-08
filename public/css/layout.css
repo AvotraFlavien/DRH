@@ -1,0 +1,170 @@
+:root {
+  --bs-light-primary: #F1FAFF;
+  --bs-active-primary:$blue;
+  --bs-light-success: #E8FFF3;
+  --bs-active-success: #47BE7D;
+  --bs-light-info: #F8F5FF;
+  --bs-active-info: #6cb2eb;
+  --bs-light-warning: #FFF8DD;
+  --bs-active-warning: #F1BC00;
+  --bs-light-danger: #FFF5F8;
+  --bs-active-danger: #D9214E;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden !important;
+  min-height: 100vh;
+  display: flex;
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  color: #111111;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: silver;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: silver;
+  width: 100%;
+}
+
+/*
+* 
+* LEFT SLIDE NAV    CSS
+*
+*/
+.left-sidenav {
+  background-color: #fff;
+  min-width: 230px;
+  max-width: 230px;
+  min-height: 100vh;
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 6px 0 rgba(218, 218, 253, 0.65), 0 0px 6px 0 rgba(206, 206, 238, 0.54);
+}
+.left-sidenav .brand {
+  text-align: center;
+  height: 52px;
+}
+.left-sidenav .brand .logo {
+  line-height: 52px;
+  vertical-align: center;
+}
+.left-sidenav .brand .logo .logo-sm {
+  height: 25px;
+  margin-top: -5px;
+}
+.left-sidenav .brand .logo .logo-text {
+  font-size: 19px;
+  font-weight: bold;
+}
+.left-sidenav .profil {
+  margin-top: 5px;
+}
+.left-sidenav .profil img {
+  height: 45px;
+  width: 45px;
+  margin-right: 5px;
+}
+.left-sidenav .profil .profil-name {
+  font-weight: 500;
+  font-size: 16px;
+}
+.left-sidenav .menu-content {
+  height: 100% !important;
+  padding-bottom: 70px;
+}
+.left-sidenav .menu-content .nav-wrapper {
+  height: inherit;
+  width: inherit;
+  overflow: hidden;
+}
+.left-sidenav .menu-content .offset {
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+}
+.left-sidenav .menu-content .nav-content-wrapper {
+  box-sizing: border-box !important;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  min-width: 100%;
+  scrollbar-width: none;
+  overflow: scroll;
+  padding-bottom: 70px;
+}
+.left-sidenav .menu-content .left-sidenav-menu {
+  padding: 16px;
+}
+
+/*
+* 
+* END LEFT SLIDE NAV    CSS
+*
+*/
+/*
+* 
+* TOP  NAVBAR   CSS
+*
+*/
+.toolbar {
+  width: 100%;
+  box-shadow: 0 2px 6px 0 rgba(218, 218, 253, 0.65), 0 0px 6px 0 rgba(206, 206, 238, 0.54);
+}
+.toolbar .page-navbar {
+  background-color: #fff;
+  min-height: 52px;
+  position: relative !important;
+}
+.toolbar * {
+  color: #7E8299 !important;
+}
+
+/*
+* 
+* END TOP  NAVBAR CSS
+*
+*/
+header {
+  margin-top: 60px;
+}
+
+/*
+* 
+*  END PAGE CSS
+*
+*/
+.page-wrapper {
+  overflow-x: auto !important;
+  flex: 1;
+  padding: 0;
+  display: block;
+  margin-left: 230px;
+}
+
+/*
+* 
+*  PAGE CSS
+*
+*/

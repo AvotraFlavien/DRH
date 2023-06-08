@@ -1,0 +1,45 @@
+.tresor .title {
+  font-size: 34px;
+  color: #444;
+}
+.tresor .card {
+  box-shadow: 0 0 2rem 0 rgba(33, 37, 41, 0.1);
+}
+.tresor .br-research-btn {
+  background-image: linear-gradient(310deg, #2152ff, #21d4fd);
+  color: white;
+  border: 0;
+}
+.tresor .card-tittle {
+  font-weight: 501;
+  font-size: 1.275rem;
+  color: #181c32;
+}
+.tresor .card-tittle span {
+  color: silver;
+  font-size: 15px;
+}
+.tresor .card-toolbar label {
+  font-size: 12px;
+}
+.tresor .table .tittle {
+  color: silver;
+  font-weight: 700 !important;
+}
+
+.tittle td {
+  border: 0;
+  font-size: smaller;
+}
+
+.boldest {
+  font-weight: 700 !important;
+}
+
+.pink {
+  color: #f10842;
+}
+
+.btn-clot:hover {
+  color: #f10842;
+}
