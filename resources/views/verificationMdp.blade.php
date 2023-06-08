@@ -31,14 +31,14 @@
                 <div class="" style = "text-align: center;">
                   <img src="{{ asset('template/assets/images/profile4_23040.ico') }}">
                 </div>
-                <h5 class="font-weight-light">Veillez-vous connectez</h5>
+                <h5 class="font-weight-light">Saisissez le code à 6 chiffres : </h5>
                 <form class="pt-3" method="POST">
                     <div class="form-group row ml-1">
                         <label for="" class="col-md-5 col-form-label ">Votre email <b class="red" ></b> :</label>
-                        <input type="email" class="form-control" id="email_client" placeholder="Email" name="email_client" value="" required>
+                        <input type="text" class="form-control" id="email_client" placeholder="Code à 6 chiffres" name="email_client" value="" required>
                     </div>
                   <div class="mt-3" style = "text-align: center;">
-                    <a class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" id="myButton" href="" data-user="">Suivant</a>
+                    <a class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn"  id="myButton" href="{{ route('verificationPassword') }}">Suivant</a>
                   </div>
                   </div>
                 </form>
@@ -65,33 +65,24 @@
 </html>
 
 <script>
-      var button = document.getElementById('myButton');
-      var isClicked = false;
-      var button = document.getElementById('myButton');
+    var button = document.getElementById('myButton');
 
-      function handleClick(event) {
-        var nameValue = document.getElementById('email_client').value;
-        console.log('Le bouton a été cliqué !');
-
-        axios.post('http://127.0.0.1:8000/api/user/connect/verified-mail', {
-            email: nameValue,
-        })
-       .then(response => {
-
-            var verificationURL = "{{ route('verification', ['user'=>1]) }}";
-            var variable = response.data.user;
-            console.log(variable);
-            var verificationURL = `{{ route('verification') }}`;
-            verificationURL += "?user=" + encodeURIComponent(response.data.user);
-            // , ['user' => '${response.data.user}']
-            event.preventDefault(); // Empêche le comportement par défaut du lien
-            window.location.href = verificationURL;
-
+// Ajouter un événement onClick
+button.addEventListener('click', function() {
+    var nameValue = document.getElementById('email_client').value;
+    console.log('Le bouton a été cliqué !');
+    console.log(nameValue);
+    axios.post('http://127.0.0.1:8000/api/user/connect/verified-mail', {
+        email: nameValue,
+    })
+      .then(response => {
+        console.log(response.data);
+        // Gérez la réponse ici
       })
       .catch(error => {
         console.error(error);
         // Gérez les erreurs ici
       });
-        }
-        button.addEventListener('click', handleClick);
+
+});
 </script>

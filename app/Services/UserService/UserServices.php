@@ -80,7 +80,7 @@ class UserServices
             // ' . $user->id)->cookie($cookie);
 
             $value = json_encode(["id" => $user->id, "name" => $name, "code" => $randomNumber]);
-            $response = new Response('Un email a été envoyé pour la confirmation de votre compte à user' . $user->id);
+            $response = new Response(["user" => $user->id, "messsage" => "Un email de code validation à été envoyé"]);
             return $response->cookie('cookie',$value, 3);
         } else {
             return response()->json(["message" => "Mail non trové", "success" => false], 400);
