@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmployeController;
+use App\Models\Employe;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,15 +17,12 @@ use App\Http\Controllers\EmployeController;
 |
 */
 
-Route::post('user/create-employe', [EmployeController::class, 'createEmployer']);
-Route::post('user/create-employe/account/{employe}', [EmployeController::class, 'createEmployeAccount']);
-
-
 Route::post('user/connect/verified-mail', [UserController::class, 'verificationMail']);
 Route::get('/user/verification/code/{id_user}', [UserController::class, 'verificationUser']);
 Route::post('user/connect/verified-password/{user}', [UserController::class, 'verificationPassword']);
 
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware("auth")->group(function () {
+    Route::post('user/create-employe', [EmployeController::class, 'createEmployer'])->can('create', Employe::class);
+    Route::post('user/create-employe/account/{employe}', [EmployeController::class, 'createEmployeAccount']);
 });

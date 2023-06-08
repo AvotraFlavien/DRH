@@ -2,12 +2,14 @@
 
 namespace App\Services\Account;
 
+use App\Helper\Helper;
 use App\Models\Employe;
 use App\Models\User;
 use App\Services\CRUD\CrudServices;
 use Illuminate\Http\Request;
 use App\Validator\ValidatorUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class ServiceAccount
 {
@@ -16,7 +18,8 @@ class ServiceAccount
         protected Request $request,
         protected Employe $__model_employe,
         protected User $__model,
-        protected CrudServices $__crud
+        protected CrudServices $__crud,
+        protected Helper $helper
     ) {
     }
 
@@ -24,8 +27,13 @@ class ServiceAccount
     public function createEmploye()
     {
         $validationEmploye = $this->validatorUsers->validateFormEmploye($this->request);
-        $val = ($validationEmploye) ? $this->__crud->crudGeneralise($this->__model_employe, $validationEmploye) : $validationEmploye;
-        return $val;
+        if ($validationEmploye) {
+            $image = Storage::disk('public')->path("Images/profil_default.png");
+            $images_enregistrer = $this->helper->helperStockagePublicImage($image, "Profil");
+            $validationEmploye["photo"] = $images_enregistrer;
+            $this->__crud->crudGeneralise($this->__model_employe, $validationEmploye);
+        }
+        return $validationEmploye;
     }
 
     public function serviceAddAccountUser($employe)
@@ -39,5 +47,7 @@ class ServiceAccount
             $this->__crud->crudGeneralise($this->__model, $validation);
             return array("name" => $validation["name"], "email" => $validation["email"], "password" => $pass);
         }
+
+        return $validation;
     }
 }
