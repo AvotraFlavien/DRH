@@ -20,7 +20,7 @@ use App\Models\Employe;
 Route::post('user/connect/verified-mail', [UserController::class, 'verificationMail']);
 Route::get('/user/verification/code/{id_user}', [UserController::class, 'verificationUser']);
 Route::post('user/connect/verified-password/{user}', [UserController::class, 'verificationPassword']);
-
+Route::get('user/list', [UserController::class, "listUser"]);
 
 Route::middleware("auth")->group(function () {
     Route::post('user/create-employe', [EmployeController::class, 'createEmployer'])->can('create', Employe::class);

@@ -14,6 +14,10 @@ class UserController extends Controller
     ) {
     }
 
+    public function listUser(User $user){
+        $us = $user::all();
+        return response()->json(["data" => $us], 200);
+    }
 
     public function verificationMail()
     {
