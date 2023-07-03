@@ -26,9 +26,9 @@ class ValidatorUsers
 
                 "nom" => 'required|string|max:255',
                 "prenom" => 'required|string|max:255',
-                "matricule" => 'required|integer',
+                "matricule" => 'required|integer|unique:employes',
                 "poste" => 'required|string|max:255',
-                "telephone" => 'nullable|integer',
+                "telephone" => 'nullable|integer|unique:employes',
                 "date_naissance" => 'nullable|date' ,
                 "adresse" => 'nullable|string|max:255',
                 "photo" => 'nullable|string|max:255',

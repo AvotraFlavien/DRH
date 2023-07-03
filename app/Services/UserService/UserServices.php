@@ -11,6 +11,7 @@ use App\Validator\ProfilValidator;
 use Illuminate\Support\Facades\DB;
 use App\Services\CRUD\CrudServices;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cookie;
 use App\Services\ProfilService\ProfilService;
 use App\Notifications\ValidationCodeNotification;
 use App\Services\CoockiesServices\CoockisesServices;
@@ -44,7 +45,24 @@ class UserServices
         $this->__cookie = $cook;
     }
 
-
+    public function loginService()
+    {
+        $validation = $this->__validator->validationLogin($this->__request);
+        $user = User::where('email', '=', $validation["email"])->get()->first();
+        if ($validation && $user && Hash::check($validation["password"], $user->password) == true) {
+            $token = $user->createToken($user->name . ' ' . $user->email);
+            return response()->json(
+                [
+                    "user" => ["id" => $user->id, "id_employe" => $user->employe, "role" => $user->role, "name" => $user->name, "email" => $user->email],
+                    "success" => "true",
+                    "token" => $token->plainTextToken
+                ],
+                200
+            );
+        } else {
+            return response()->json(["message" => "Mail non trové", "success" => false], 400);
+        }
+    }
 
     /**
      * Vérification mail lors de l'essai de connexion
@@ -57,31 +75,34 @@ class UserServices
 
         $user = User::where('email', '=', $validationForm["email"])->get()->first();
         if ($validationForm && $user) {
+            Cookie::forget('cookie');
+
             // Random de 6 chiffres
             $randomNumber = rand(100000, 999999);
 
             $name = $user->name;
 
             // Notification par mail du code de validation du compte
+            $code = $randomNumber;
             $user->notify(new ValidationCodeNotification(
                 "Code validation",
                 "Bonjour $name !",
-                "Voici votre code de validation : $randomNumber",
+                "Voici votre code de validation : $code",
                 null
             ));
 
             // $user->id
             $cookie = $this->__cookie->stockageCoockies(
                 "cookie",
-                ["id" => $user->id, "name" => $name, "code" => $randomNumber]
+                ["id" => $user->id, "name" => $name, "code" => $code]
             );
             // dump($cookie);
             // return response('Un email a été envoyé pour la confirmation de votre compte à user
             // ' . $user->id)->cookie($cookie);
 
-            $value = json_encode(["id" => $user->id, "name" => $name, "code" => $randomNumber]);
-            $response = new Response(["user" => $user->id, "messsage" => "Un email de code validation à été envoyé"]);
-            return $response->cookie('cookie',$value, 3);
+            $value = json_encode(["id" => $user->id, "name" => $name, "code" => $code]);
+            $response = new Response($cookie);
+            return $response->cookie('cookie', $value, 3, '/', null, false, false);
         } else {
             return response()->json(["message" => "Mail non trové", "success" => false], 400);
         }

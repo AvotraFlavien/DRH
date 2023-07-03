@@ -33,4 +33,8 @@ class EmployeController extends Controller
         $user = $this->serviceAccount->serviceAddAccountUser($employe);
         return response()->json(["data" => $user, "message" => "Insertion réussie"], 200);
     }
+
+    public function listeEmploye(){
+        return response()->json(["liste" => Employe::paginate(3), "success" => true],200);
+    }
 }

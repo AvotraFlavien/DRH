@@ -28,9 +28,10 @@ class ServiceAccount
     {
         $validationEmploye = $this->validatorUsers->validateFormEmploye($this->request);
         if ($validationEmploye) {
-            $image = Storage::disk('public')->path("Images/profil_default.png");
-            $images_enregistrer = $this->helper->helperStockagePublicImage($image, "Profil");
-            $validationEmploye["photo"] = $images_enregistrer;
+            // $image = Storage::disk('public')->path("Images/profil_default.png");
+            // $images_enregistrer = $this->helper->helperStockagePublicImage($image, "Profil");
+            // $validationEmploye["photo"] = "http://127.0.0.1:8000/".$images_enregistrer;
+            $validationEmploye["photo"] = "http://127.0.0.1:8000/storage/Images/profil_default.png";
             $this->__crud->crudGeneralise($this->__model_employe, $validationEmploye);
         }
         return $validationEmploye;
