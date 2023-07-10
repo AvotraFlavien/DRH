@@ -96,13 +96,8 @@ class UserServices
                 "cookie",
                 ["id" => $user->id, "name" => $name, "code" => $code]
             );
-            // dump($cookie);
-            // return response('Un email a été envoyé pour la confirmation de votre compte à user
-            // ' . $user->id)->cookie($cookie);
-
-            $value = json_encode(["id" => $user->id, "name" => $name, "code" => $code]);
             $response = new Response($cookie);
-            return $response->cookie('cookie', $value, 3, '/', null, false, false);
+            return $response->cookie('cookie', $response);
         } else {
             return response()->json(["message" => "Mail non trové", "success" => false], 400);
         }
