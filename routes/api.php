@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmployeController;
+use App\Http\Controllers\OffresController;
 use App\Models\Employe;
 
 /*
@@ -24,6 +25,7 @@ Route::post('/user/verification/code/{id_user}', [UserController::class, 'verifi
 
 Route::post('user/connect/verified-password/{user}', [UserController::class, 'verificationPassword']);
 
+Route::post('user/publication/LinkedIn', [OffresController::class, 'publcationLinkedIn']);
 
 Route::middleware("auth")->group(function () {
     Route::get('user/get_employe', [UserController::class, "getEmployer"]);
@@ -31,4 +33,9 @@ Route::middleware("auth")->group(function () {
     Route::get('user/list', [UserController::class, "listUser"]);
     Route::post('user/create-employe', [EmployeController::class, 'createEmployer'])->can('create', Employe::class);
     Route::post('user/create-employe/account/{employe}', [EmployeController::class, 'createEmployeAccount']);
+
+    // Publication
+    Route::get('user/rh /getListePage', [OffresController::class, 'listePageFb']);
+    Route::get('user/offres/listeTypesSocialMedia', [OffresController::class, 'ListeSocialMedia']);
+    Route::post('user/rh/postOffre', [OffresController::class, 'publicationOffres']);
 });
